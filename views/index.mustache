@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<header>
+  <h1>Comic Book Collection</h1>
+  <h3>Marvel, DC, and Manga</h3>
+</header>
+
+<body>
+      <fieldset>
+        <legend>Add Comic To Collection</legend>
+        <form action="/newcomic" method="post">
+          <label for="name">Name:</label>
+          <input type="text" name="name">
+          <br>
+          <label for="universe">Universe:</label>
+          <input type="text" name="universe" placeholder="Marvel, DC, etc.">
+          <br>
+          <label for="writer">Writer:</label>
+          <input type="text" name="writer">
+          <br>
+          <label for="artist">Artist:</label>
+          <input type="text" name="artist">
+          <br>
+          <label for="volume">Volume:</label>
+          <input type="text" name="volume">
+          <br>
+          <label for="edition">Edition:</label>
+          <input type="text" name="edition">
+          <br>
+          <button type="submit" name="button">Add Comic</button>
+        </form>
+      </fieldset>
+      <fieldset>
+        <legend>Our Collection</legend>
+        {{#books}}
+        <div>
+          <h4>{{name}}</h4>
+          <h5>{{universe}} Universe</h5>
+          <ul>
+            <li>Collection ID: {{_id}}</li>
+            <li>Writer: {{writer}}</li>
+            <li>Artist: {{artist}}</li>
+            {{#issue}}
+            <li>Vol. {{volume}}</li>
+            <li>Edition {{edition}}</li>
+            {{/issue}}
+          </ul>
+          <form action="/update" method="post">
+            <p>Update Comic</p>
+            <label for="updateKey">New Name:</label>
+            <input type="text" name="newName">
+            <br>
+            <button type="submit" name="id" value='{{_id}}'>Update</button>
+          </form>
+          <br>
+          <form action="/delete" method="post">
+            <button type="submit" name="id" value='{{_id}}'>Delete</button>
+          </form>
+        </div>
+        {{/books}}
+      </fieldset>
+</body>
+</html>
